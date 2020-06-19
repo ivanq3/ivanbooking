@@ -1,0 +1,14 @@
+{
+  "appId": "app.web.ivanbooking",
+  "appName": "booking-by-ivan",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh"
+}

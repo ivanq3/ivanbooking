@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, Platform } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { AuthService, AuthResponseData } from './auth.service';
 
@@ -14,12 +14,14 @@ import { AuthService, AuthResponseData } from './auth.service';
 export class AuthPage implements OnInit {
   isLoading = false;
   isLogin = true;
+  private backButtonSub: Subscription;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private platform: Platform
   ) {}
 
   ngOnInit() {}
@@ -84,5 +86,19 @@ export class AuthPage implements OnInit {
         buttons: ['Okay'],
       })
       .then((alertEl) => alertEl.present());
+  }
+
+  ionViewDidEnter() {
+    this.backButtonSub = this.platform.backButton.subscribeWithPriority(
+      0,
+      () => {
+        // tslint:disable-next-line: no-string-literal
+        navigator['app'].exitApp();
+      }
+    );
+  }
+
+  ionViewWillLeave() {
+    this.backButtonSub.unsubscribe();
   }
 }

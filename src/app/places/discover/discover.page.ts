@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { SegmentChangeEventDetail } from '@ionic/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 

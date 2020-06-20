@@ -1,11 +1,22 @@
 <ion-app>
-  <ion-menu side="start" menuId="m1">
+  <ion-menu side="start" menuId="m1" slot="top">
     <ion-header>
       <ion-toolbar>
         <ion-title>
           PairBnB
         </ion-title>
       </ion-toolbar>
+      <ion-item lines="full">
+        <ion-icon slot="start" name="moon"></ion-icon>
+        <ion-label>
+          Toggle Dark Theme
+        </ion-label>
+        <ion-toggle
+          slot="end"
+          #darkToggle
+          (ionChange)="onClick(darkToggle.checked)"
+        ></ion-toggle>
+      </ion-item>
     </ion-header>
     <ion-content>
       <ion-list>

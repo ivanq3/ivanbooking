@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, RendererFactory2 } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { AuthService } from './auth/auth.service';
@@ -16,13 +16,32 @@ import { take } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
   private authSub: Subscription;
   private previousAuthState = false;
+  private dark = false;
+  renderer: any;
 
   constructor(
     private platform: Platform,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    rendererFactory: RendererFactory2
   ) {
+    this.renderer = rendererFactory.createRenderer(null, null);
     this.initializeApp();
+  }
+
+  addBodyClass(bodyClass) {
+    this.renderer.addClass(document.body, bodyClass);
+  }
+  removeBodyClass(bodyClass) {
+    this.renderer.removeClass(document.body, bodyClass);
+  }
+
+  onClick(dark: boolean) {
+    if (dark) {
+      this.addBodyClass('dark');
+    } else {
+      this.removeBodyClass('dark');
+    }
   }
 
   ngOnInit() {
